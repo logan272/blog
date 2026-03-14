@@ -1,5 +1,5 @@
 base_url = "https://logan272.github.io/blog"
-title = "CLOB Blog"
+title = "Logan's Blog"
 description = "Technical deep dives into building a Central Limit Order Book exchange"
 compile_sass = false
 generate_feeds = true
