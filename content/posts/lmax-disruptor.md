@@ -1,13 +1,14 @@
-+++
-title = "The LMAX Disruptor"
-date = 2026-03-06
-description = "How the LMAX Disruptor replaces inter-thread queues with a pre-allocated ring buffer and sequence-based coordination — eliminating locks, allocation, and false sharing."
-[taxonomies]
-tags = ["systems", "matching-engine", "performance"]
-[extra]
-toc = true
+---
+title: "The LMAX Disruptor"
+date: 2026-03-06
+description: "How the LMAX Disruptor replaces inter-thread queues with a pre-allocated ring buffer and sequence-based coordination — eliminating locks, allocation, and false sharing."
+taxonomies:
+  tags: ["data-structure", "matching-engine", "performance"]
+extra:
+  toc: true
+---
 
-+++
+# The LMAX Disruptor
 
 We're building the matching engine for a Central Limit Order Book (CLOB) exchange. The matching engine has one job: take incoming orders and match them against the order book as fast as possible.
 

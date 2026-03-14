@@ -1,6 +1,6 @@
 base_url = "https://logan272.github.io/blog"
 title = "Logan's Blog"
-description = "Rust, systems design, zero-knowledge proofs, cryptography, and the math behind it all"
+description = "Rust, zk , cryptography"
 default_language = "en"
 theme = "serene"
 output_dir = "public"
