@@ -6,6 +6,9 @@ extra:
   recent_max: 10
   recent_more_text: "more posts →"
   date_format: "%b %e, %Y"
-  links: []
+  links:
+    - name: "GitHub"
+      url: "https://github.com/logan272"
+      icon: "github"
   footer: true
 ---
