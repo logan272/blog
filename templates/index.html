@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.title }}{% endblock title %}
+
+{% block content %}
+<div class="post-list">
+    <h1>Posts</h1>
+    {% set section = get_section(path="_index.md") %}
+    {% for page in section.pages %}
+    <article class="post-summary">
+        <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %e, %Y") }}</time>
+        {% if page.description %}
+        <p>{{ page.description }}</p>
+        {% endif %}
+        {% if page.extra.reading_time %}
+        <span class="reading-time">{{ page.reading_time }} min read</span>
+        {% endif %}
+    </article>
+    {% endfor %}
+</div>
+{% endblock content %}

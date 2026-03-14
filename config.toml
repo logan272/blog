@@ -1,0 +1,20 @@
+base_url = "https://example.github.io/blog"
+title = "CLOB Blog"
+description = "Technical deep dives into building a Central Limit Order Book exchange"
+compile_sass = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+build_search_index = false
+
+taxonomies = [
+    { name = "tags" },
+]
+
+[markdown]
+smart_punctuation = true
+
+[markdown.highlighting]
+enabled = true
+theme = "github-dark"
+
+[extra]

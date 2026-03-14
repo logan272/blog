@@ -1,4 +1,12 @@
-# The LMAX Disruptor: The Fastest Way to Pass Messages Between Threads
++++
+title = "The LMAX Disruptor: The Fastest Way to Pass Messages Between Threads"
+date = 2026-03-06
+description = "How the LMAX Disruptor replaces inter-thread queues with a pre-allocated ring buffer and sequence-based coordination — eliminating locks, allocation, and false sharing."
+[taxonomies]
+tags = ["systems", "concurrency", "performance", "matching-engine"]
+[extra]
+toc = true
++++
 
 We're building the matching engine for a Central Limit Order Book (CLOB) exchange. The matching engine has one job: take incoming orders and match them against the order book as fast as possible.
 
@@ -327,7 +335,7 @@ The ring is allocated once at startup. Every subsequent operation reads and writ
 
 These four properties compound. A queue pays lock/CAS + allocation + kernel wake-up on every message — costs that are individually small but add up to microseconds under load. The Disruptor replaces all of that with a single atomic store (the cursor advance) and a single atomic load (the barrier check). Everything else is plain memory reads and writes to pre-cached, contiguous slots.
 
-**50-200x faster per message.** The official LMAX benchmarks bear this out — on a 3-stage pipeline, the Disruptor achieves a mean latency of 52 nanoseconds per hop compared to 32,757 nanoseconds for `ArrayBlockingQueue` (~630x). 
+**50-200x faster per message.** The official LMAX benchmarks bear this out — on a 3-stage pipeline, the Disruptor achieves a mean latency of 52 nanoseconds per hop compared to 32,757 nanoseconds for `ArrayBlockingQueue` (~630x).
 
 ---
 

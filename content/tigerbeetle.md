@@ -1,4 +1,12 @@
-# TigerBeetle: The DB Where Bugs Can't Hide in Your Balance Sheet
++++
+title = "TigerBeetle: The DB Where Bugs Can't Hide in Your Balance Sheet"
+date = 2025-03-14
+description = "How TigerBeetle's fixed schema of accounts, transfers, and ledgers enforces double-entry bookkeeping at the database level — and where it fits in an exchange architecture."
+[taxonomies]
+tags = ["databases", "finance", "architecture", "matching-engine"]
+[extra]
+toc = true
++++
 
 We're building a Central Limit Order Book (CLOB) exchange. At the heart of every exchange is a component that answers one question: **"Does this user have enough money to place this order?"**
 
