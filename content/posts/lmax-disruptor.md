@@ -1,7 +1,6 @@
 ---
 title: "The LMAX Disruptor"
 date: 2026-03-06
-description: "How the LMAX Disruptor replaces inter-thread queues with a pre-allocated ring buffer and sequence-based coordination — eliminating locks, allocation, and false sharing."
 taxonomies:
   tags: ["data-structure", "matching-engine", "performance"]
 extra:
