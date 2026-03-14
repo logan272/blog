@@ -40,8 +40,8 @@ blog_section_path = "/posts"
 back_link_text = "Back"
 force_theme = false
 
-footer_copyright = "© 2026 Logan"
-footer_credits = true
+footer_copyright = "© 2026 Logan Luo"
+footer_credits = false
 
 not_found_error_text = "404 Not Found"
 not_found_recover_text = "« back to home »"
