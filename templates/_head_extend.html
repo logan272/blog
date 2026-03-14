@@ -1,0 +1,14 @@
+<script type="module">
+  const blocks = document.querySelectorAll('code[data-lang="mermaid"]');
+  if (blocks.length > 0) {
+    blocks.forEach((code) => {
+      const pre = code.parentElement;
+      const el = document.createElement('pre');
+      el.classList.add('mermaid');
+      el.textContent = code.textContent;
+      pre.replaceWith(el);
+    });
+    const mermaid = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
+    mermaid.default.initialize({ startOnLoad: true });
+  }
+</script>
