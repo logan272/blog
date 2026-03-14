@@ -1,11 +1,12 @@
 +++
-title = "TigerBeetle: The DB Where Bugs Can't Hide in Your Balance Sheet"
-date = 2025-03-14
+title = "TigerBeetle"
+date = 2026-03-14
 description = "How TigerBeetle's fixed schema of accounts, transfers, and ledgers enforces double-entry bookkeeping at the database level — and where it fits in an exchange architecture."
 [taxonomies]
 tags = ["databases", "finance", "architecture", "matching-engine"]
 [extra]
 toc = true
+
 +++
 
 We're building a Central Limit Order Book (CLOB) exchange. At the heart of every exchange is a component that answers one question: **"Does this user have enough money to place this order?"**
@@ -191,7 +192,7 @@ Cross-ledger operations (like a currency exchange) use **linked transfers** — 
 
 ---
 
-## Why Only Three Primitives?
+## Primitives
 
 TigerBeetle's thesis: **all financial state can be expressed as accounts, transfers, and ledgers.**
 
@@ -208,9 +209,9 @@ This is the core design philosophy: **restrict the problem space so that correct
 
 ---
 
-## Three Examples: Simple to Complex
+## Examples
 
-### Example 1: A Simple Payment
+### Simple Payment
 
 Alice pays Bob $30.
 
@@ -249,7 +250,7 @@ If Alice only had $20, and her account has the `credits_must_not_exceed_debits` 
 
 ---
 
-### Example 2: A Hotel Hold (Two-Phase Transfer)
+### Hotel Hold (Two-Phase Transfer)
 
 A hotel charges `$200`/night but doesn't know the final amount until checkout (minibar, room service, etc.). They place a **hold** for `$250` at check-in, then finalize the actual amount at checkout.
 
@@ -328,7 +329,7 @@ After 3 days (the `timeout` value), TigerBeetle automatically voids the pending 
 
 ---
 
-### Example 3: A Spot Trade on an Exchange (Linked + Two-Phase)
+### Spot Trade on an Exchange (Linked + Two-Phase)
 
 Alice wants to buy 1 BTC at $50,000 from Bob. The exchange charges a 0.1% taker fee.
 
