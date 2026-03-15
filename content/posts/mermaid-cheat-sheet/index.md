@@ -2,7 +2,7 @@
 title: "Mermaid Cheat Sheet"
 date: 2026-01-09
 taxonomies:
-  tags: ["tools", "productivity"]
+  tags: ["tools"]
 extra:
   toc: true
 ---
