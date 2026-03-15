@@ -34,6 +34,7 @@
 {% endblock head %}
 
 {% block content %}
+{% include "_topbar.html" %}
 <div id="wrapper">
   <main>
     {{ macros::back_link(path = get_url(path=section.path)) }}

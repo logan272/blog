@@ -57,24 +57,9 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
     });
 </script>
 {% endif %} {% endblock head %} {% block content %}
+{% include "_topbar.html" %}
 <div id="wrapper">
     <main>
-        <section id="info">
-            {% if section.extra.avatar %}
-            <img src="{{ get_url(path=section.extra.avatar) }}" alt="avatar" />
-            {% endif %}
-            <div id="text">
-                <div>
-                    <span id="name">{{ section.extra.name }}</span>
-                    {% if section.extra.id %}
-                    <span id="id">@{{ section.extra.id }}</span>
-                    {% endif %}
-                </div>
-                {% if section.extra.bio %}
-                <div id="bio">{{ section.extra.bio }}</div>
-                {% endif %}
-            </div>
-        </section>
         <section id="brief" class="prose">
             {{ section.content | trim | safe }}
         </section>
