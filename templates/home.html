@@ -63,6 +63,11 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
         <section id="brief" class="prose">
             {{ section.content | trim | safe }}
         </section>
+        {% if section.extra.recent %} {% set blog_section_path =
+        config.extra.blog_section_path | trim_start_matches(pat="/") %}
+        {% set section_md_path = blog_section_path ~ "/_index.md" %} {%
+        set blog_section = get_section(path=section_md_path) %}
+        <h2 class="posts-title">Posts</h2>
         <div class="home-columns">
             {# Mobile uses <details> for collapsible filter/sort UI; desktop uses an always-visible
                sidebar. Both render the same controls and JS syncs state between them. #}
@@ -95,12 +100,7 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                 </details>
             </div>
             <div class="home-main">
-                {% if section.extra.recent %} {% set blog_section_path =
-                config.extra.blog_section_path | trim_start_matches(pat="/") %}
-                {% set section_md_path = blog_section_path ~ "/_index.md" %} {%
-                set blog_section = get_section(path=section_md_path) %}
                 <section class="layout-list">
-                    <h2 class="posts-title">Posts</h2>
                     {% set calendar_icon = load_data(path="icon/calendar.svg") %}
                     <div class="post-list" id="post-list">
                         {% for post in blog_section.pages |
@@ -148,7 +148,6 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                     </div>
                     {% endif %}
                 </section>
-                {% endif %}
             </div>
             <aside class="home-sidebar">
                 <div class="sidebar-section">
@@ -173,6 +172,7 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                 {% endif %}
             </aside>
         </div>
+        {% endif %}
     </main>
     {% if section.extra.footer %} {% include "_footer.html" %} {% endif %}
 </div>
