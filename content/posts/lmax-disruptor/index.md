@@ -2,7 +2,7 @@
 title: "The LMAX Disruptor"
 date: 2026-03-06
 taxonomies:
-  tags: ["algorithm","data-structure", "clob"]
+  tags: ["data-structure", "clob"]
 extra:
   toc: true
 ---

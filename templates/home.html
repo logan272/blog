@@ -98,6 +98,7 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                 {% set section_md_path = blog_section_path ~ "/_index.md" %} {%
                 set blog_section = get_section(path=section_md_path) %}
                 <section class="layout-list">
+                    <h2 class="posts-title">Posts</h2>
                     <div class="post-list" id="post-list">
                         {% for post in blog_section.pages |
                         slice(end=section.extra.recent_max) %}
