@@ -2,6 +2,7 @@
 template: "blog.html"
 page_template: "post.html"
 sort_by: "date"
+insert_anchor_links: "right"
 paginate_by: 20
 extra:
   date_format: "%b %e, %Y"
