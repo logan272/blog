@@ -33,7 +33,6 @@ anchors = "on"
 
 sections = [
   { name = "Posts", path = "/posts", is_external = false },
-  { name = "Tags", path = "/tags", is_external = false },
 ]
 blog_section_path = "/posts"
 

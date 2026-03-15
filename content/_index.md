@@ -1,7 +1,7 @@
 ---
 template: "home.html"
 extra:
-  name: "Logan Luo"
+  name: "Logan's Blog"
   recent: true
   recent_max: 10
   recent_more_text: "more posts →"
