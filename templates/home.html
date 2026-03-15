@@ -119,7 +119,10 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                             {% elif post.description %}
                             <p class="post-card-excerpt">{{ post.description | truncate(length=300) }}</p>
                             {% else %}
-                            <p class="post-card-excerpt">{{ post.content | striptags | truncate(length=300) }}</p>
+                            {# post.content includes the <h1> title — strip tags then remove the leading title text to avoid duplication #}
+                            {% set raw_excerpt = post.content | striptags | trim %}
+                            {% set title_prefix = post.title ~ "\n" %}
+                            <p class="post-card-excerpt">{{ raw_excerpt | trim_start_matches(pat=title_prefix) | trim | truncate(length=300) }}</p>
                             {% endif %}
                             <div class="post-card-footer">
                                 <span class="post-card-date">{{ calendar_icon | safe }} {{ post.date | date(format=section.extra.date_format) }}</span>
