@@ -2,7 +2,7 @@
 title: "The LMAX Disruptor"
 date: 2026-03-06
 taxonomies:
-  tags: ["data-structure", "matching-engine", "performance"]
+  tags: ["performance", "algorithms","data-structure", "clob", "matching-engine"]
 extra:
   toc: true
 ---
@@ -375,6 +375,7 @@ Don't use it when:
 
 ## References
 
+- [A minimal Rust implementation of the LMAX Disruptor for this post.](https://github.com/logan272/disruptor-rs)
 - [LMAX Disruptor Technical Paper (Martin Thompson)](https://lmax-exchange.github.io/disruptor/disruptor.html)
 - [Mechanical Sympathy Blog (Martin Thompson)](https://mechanical-sympathy.blogspot.com/)
 - [LMAX Architecture (Martin Fowler)](https://martinfowler.com/articles/lmax.html)
