@@ -1,5 +1,8 @@
 <style>
 #inline-toc details { border: none; }
+.prose table { width: 100%; border: none; }
+.table-wrapper { overflow-x: auto; }
+.prose .mermaid svg { max-width: 100%; height: auto; }
 </style>
 <script type="module">
   const blocks = document.querySelectorAll('code[data-lang="mermaid"]');
@@ -14,4 +17,11 @@
     const mermaid = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
     mermaid.default.initialize({ startOnLoad: true });
   }
+
+  document.querySelectorAll('.prose table').forEach((table) => {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('table-wrapper');
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
 </script>
