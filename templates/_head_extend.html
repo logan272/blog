@@ -12,6 +12,12 @@
   --transition-fast: 0.15s;
   --content-max-width: 1100px;
 }
+body.dark {
+  --border-subtle: rgba(255, 255, 255, 0.15);
+  --border-default: rgba(255, 255, 255, 0.25);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
+}
 
 /* ── Global Overrides ──────────────────────────────────────────────── */
 #inline-toc details { border: none; }
@@ -38,7 +44,7 @@ body { --avatar-size: 48px; overflow-y: auto !important; }
   z-index: 100;
   background: var(--bg-color);
   border-bottom: 1px solid var(--border-subtle);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 4px var(--border-subtle);
 }
 .top-bar-inner {
   max-width: var(--content-max-width);
@@ -211,7 +217,7 @@ body.homepage .layout-list { margin-top: 0; }
   background-position: right 0.6em center;
   padding-right: 2em;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 #sort-order:hover, #sort-order-mobile:hover {
   border-color: var(--primary-color);
@@ -244,6 +250,15 @@ body.homepage .layout-list { margin-top: 0; }
 }
 .tag-pill:hover,
 .tag-pill.active {
+  background: var(--primary-color);
+  color: #fff;
+}
+body.dark .tag-pill {
+  background: rgba(111, 143, 209, 0.2);
+  color: #a3bce6;
+}
+body.dark .tag-pill:hover,
+body.dark .tag-pill.active {
   background: var(--primary-color);
   color: #fff;
 }
@@ -303,6 +318,12 @@ footer .right #theme-toggle svg { scale: 1; }
 .prose table { width: 100%; border: none; }
 .table-wrapper { overflow-x: auto; }
 .prose .mermaid svg { max-width: 100%; height: auto; }
+body.dark .prose .mermaid,
+body.dark .prose .mermaid svg {
+  background: #ffffff !important;
+  border-radius: var(--radius-card);
+  padding: 1em;
+}
 </style>
 <script type="module">
   const blocks = document.querySelectorAll('code[data-lang="mermaid"]');
