@@ -22,6 +22,21 @@ footer .right #theme-toggle svg { scale: 1; }
 .prose table { width: 100%; border: none; }
 .table-wrapper { overflow-x: auto; }
 .prose .mermaid svg { max-width: 100%; height: auto; }
+.tag-pill {
+  display: inline-block;
+  padding: 0.2em 0.7em;
+  border-radius: 9999px;
+  font-size: 0.85em;
+  background: var(--primary-pale-color);
+  color: var(--primary-color);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: background 0.15s, color 0.15s;
+}
+.tag-pill:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
 </style>
 <script type="module">
   const blocks = document.querySelectorAll('code[data-lang="mermaid"]');

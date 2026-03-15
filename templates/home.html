@@ -84,7 +84,7 @@
       <h2 style="font-size: 1em; margin: 0 0 1em;">Tags</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 0.5em 1em;">
         {% for tag in tags.items %}
-        <a href="{{ tag.permalink }}" style="color: var(--primary-color); text-decoration: none; font-size: 0.9em;">#{{ tag.name | lower }}</a>
+        <a href="{{ tag.permalink }}" class="tag-pill">{{ tag.name | lower }} ({{ tag.pages | length }})</a>
         {% endfor %}
       </div>
     </section>

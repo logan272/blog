@@ -2,7 +2,7 @@
 title: "TigerBeetle"
 date: 2026-03-14
 taxonomies:
-  tags: ["databases", "finance", "architecture", "clob", "risk-engine"]
+  tags: ["databases", "finance", "architecture", "clob"]
 extra:
   toc: true
 ---
