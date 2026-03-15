@@ -1,107 +1,178 @@
-{% extends "_base.html" %}
-
-{% block page %}homepage{% endblock page%}
-{% block lang %}{% if section.extra.lang %}{{ section.extra.lang }}{% else %}{{ section.lang }}{% endif %}{% endblock lang %}
-{% block title %}{{ config.title }}{% endblock title %}
-{% block desc %}
-  <meta name="description" content="{{ config.description }}">
-{% endblock desc %}
-
-{% block head %}
-{% if config.markdown.highlighting.style == "class" %}
-  {% if config.extra.force_theme == "dark" %}
-    <link id="hl" rel="stylesheet" type="text/css" href="{{ get_url(path='giallo-dark.css') }}" />
-  {% else %}
-    <link id="hl" rel="stylesheet" type="text/css" href="{{ get_url(path='giallo-light.css') }}" />
-  {% endif %}
-{% endif %}
-{% if section.extra.math %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" integrity="sha384-HORx6nWi8j5/mYA+y57/9/CZc5z8HnEw4WUZWy5yOn9ToKBv1l58vJaufFAn9Zzi" crossorigin="anonymous"></script>
+{% extends "_base.html" %} {% block page %}homepage{% endblock page%} {% block
+lang %}{% if section.extra.lang %}{{ section.extra.lang }}{% else %}{{
+section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
+}}{% endblock title %} {% block desc %}
+<meta name="description" content="{{ config.description }}" />
+{% endblock desc %} {% block head %} {% if config.markdown.highlighting.style ==
+"class" %} {% if config.extra.force_theme == "dark" %}
+<link
+    id="hl"
+    rel="stylesheet"
+    type="text/css"
+    href="{{ get_url(path='giallo-dark.css') }}"
+/>
+{% else %}
+<link
+    id="hl"
+    rel="stylesheet"
+    type="text/css"
+    href="{{ get_url(path='giallo-light.css') }}"
+/>
+{% endif %} {% endif %} {% if section.extra.math %}
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+    integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+    crossorigin="anonymous"
+/>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+    integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+    crossorigin="anonymous"
+></script>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+    crossorigin="anonymous"
+></script>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js"
+    integrity="sha384-HORx6nWi8j5/mYA+y57/9/CZc5z8HnEw4WUZWy5yOn9ToKBv1l58vJaufFAn9Zzi"
+    crossorigin="anonymous"
+></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         renderMathInElement(document.body, {
             delimiters: [
-                { left: '$$', right: '$$', display: true },
-                { left: '$', right: '$', display: false },
-                { left: '\\(', right: '\\)', display: false },
-                { left: '\\[', right: '\\]', display: true }
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
             ],
-            throwOnError: false
+            throwOnError: false,
         });
     });
 </script>
-{% endif %}
-{% endblock head %}
-
-{% block content %}
+{% endif %} {% endblock head %} {% block content %}
 <div id="wrapper">
-  <main>
-    <section id="info">
-      {% if section.extra.avatar %}
-      <img src="{{ get_url(path=section.extra.avatar) }}" alt="avatar">
-      {% endif %}
-      <div id="text">
-        <div>
-          <span id="name">{{ section.extra.name }}</span>
-          {% if section.extra.id %}
-          <span id="id">@{{ section.extra.id }}</span>
-          {% endif %}
+    <main>
+        <section id="info">
+            {% if section.extra.avatar %}
+            <img src="{{ get_url(path=section.extra.avatar) }}" alt="avatar" />
+            {% endif %}
+            <div id="text">
+                <div>
+                    <span id="name">{{ section.extra.name }}</span>
+                    {% if section.extra.id %}
+                    <span id="id">@{{ section.extra.id }}</span>
+                    {% endif %}
+                </div>
+                {% if section.extra.bio %}
+                <div id="bio">{{ section.extra.bio }}</div>
+                {% endif %}
+            </div>
+        </section>
+        <section id="brief" class="prose">
+            {{ section.content | trim | safe }}
+        </section>
+        <div class="home-columns">
+            <div class="mobile-filters">
+                <details class="sidebar-section">
+                    <summary>Filters & Sorting</summary>
+                    <div class="mobile-filters-content">
+                        <div class="mobile-filter-group">
+                            <h2>Sort By</h2>
+                            <select id="sort-order-mobile">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+                        {% set tags = get_taxonomy(kind="tags") %} {% if
+                        tags.items %}
+                        <div class="mobile-filter-group">
+                            <h2>Tags</h2>
+                            <div class="sidebar-tags">
+                                {% for tag in tags.items %}
+                                <a href="{{ tag.permalink }}" class="tag-pill"
+                                    >{{ tag.name | lower }} ({{ tag.pages |
+                                    length }})</a
+                                >
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </details>
+            </div>
+            <div class="home-main">
+                {% if section.extra.recent %} {% set blog_section_path =
+                config.extra.blog_section_path | trim_start_matches(pat="/") %}
+                {% set section_md_path = blog_section_path ~ "/_index.md" %} {%
+                set blog_section = get_section(path=section_md_path) %}
+                <section class="layout-list">
+                    <div class="post-list" id="post-list">
+                        {% for post in blog_section.pages |
+                        slice(end=section.extra.recent_max) %}
+                        <a
+                            class="post instant {% if post.extra.featured %}featured{% endif %}"
+                            href="{{ post.permalink }}"
+                            data-date="{{ post.date }}"
+                        >
+                            <span>{{ post.title }}</span>
+                            <span class="date"
+                                >{{ post.date |
+                                date(format=section.extra.date_format) }}</span
+                            >
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% if blog_section.pages | length > section.extra.recent_max
+                    %}
+                    <div class="read-more">
+                        <a
+                            class="instant"
+                            href="{{ config.extra.blog_section_path }}"
+                            >{{ section.extra.recent_more_text }}</a
+                        >
+                    </div>
+                    {% endif %}
+                </section>
+                {% endif %}
+            </div>
+            <aside class="home-sidebar">
+                <div class="sidebar-section">
+                    <h2>Sort By</h2>
+                    <select id="sort-order">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+                {% set tags = get_taxonomy(kind="tags") %} {% if tags.items %}
+                <div class="sidebar-section">
+                    <h2>Tags</h2>
+                    <div class="sidebar-tags">
+                        {% for tag in tags.items %}
+                        <a href="{{ tag.permalink }}" class="tag-pill"
+                            >{{ tag.name | lower }} ({{ tag.pages | length
+                            }})</a
+                        >
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </aside>
         </div>
-        {% if section.extra.bio %}
-        <div id="bio"> {{ section.extra.bio }} </div>
-        {% endif %}
-      </div>
-    </section>
-    <section id="brief" class="prose">
-      {{ section.content | trim | safe }}
-    </section>
-    {% if section.extra.recent %}
-    {% set blog_section_path = config.extra.blog_section_path | trim_start_matches(pat="/") %}
-    {% set section_md_path = blog_section_path ~ "/_index.md" %}
-    {% set blog_section = get_section(path=section_md_path) %}
-    <section class="layout-list">
-      <div class="post-list">
-        {% for post in blog_section.pages | slice(end=section.extra.recent_max) %}
-        <a class="post instant {% if post.extra.featured %}featured{% endif %}" href="{{ post.permalink }}">
-          <span>{{ post.title }}</span>
-          <span class="date">{{ post.date | date(format=section.extra.date_format) }}</span>
-        </a>
-        {% endfor %}
-      </div>
-      {% if blog_section.pages | length > section.extra.recent_max %}
-      <div class="read-more">
-        <a class="instant" href="{{ config.extra.blog_section_path }}">{{ section.extra.recent_more_text }}</a>
-      </div>
-      {% endif %}
-    </section>
-  {% endif %}
-    {% set tags = get_taxonomy(kind="tags") %}
-    {% if tags.items %}
-    <section style="padding: 0 15px; margin: 2em 0;">
-      <h2 style="font-size: 1em; margin: 0 0 1em;">Tags</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5em 1em;">
-        {% for tag in tags.items %}
-        <a href="{{ tag.permalink }}" class="tag-pill">{{ tag.name | lower }} ({{ tag.pages | length }})</a>
-        {% endfor %}
-      </div>
-    </section>
-    {% endif %}
-  </main>
-  {% if section.extra.footer %}
-    {% include "_footer.html" %}
-  {% endif %}
+    </main>
+    {% if section.extra.footer %} {% include "_footer.html" %} {% endif %}
 </div>
-{% endblock content %}
-
-{% block script %}
+{% endblock content %} {% block script %}
 <script src="{{ get_url(path='js/lightense.min.js') }}"></script>
 {% if section.extra.mermaid %}
 <script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true });
 </script>
-{% endif %}
-{% endblock script %}
+{% endif %} {% endblock script %}
