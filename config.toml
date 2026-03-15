@@ -9,7 +9,7 @@ minify_html = false
 build_search_index = false
 generate_feeds = true
 feed_filenames = ["feed.xml"]
-taxonomies = [{ name = "tags" }, { name = "categories" }]
+taxonomies = [{ name = "tags", render = false }, { name = "categories" }]
 
 [markdown]
 render_emoji = false
