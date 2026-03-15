@@ -74,9 +74,50 @@ body.homepage main { padding: 1em 0; }
   height: 20px;
 }
 body.homepage .layout-list { margin-top: 0; }
+.post-card {
+  display: block;
+  padding: 1em 1.25em;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin-bottom: 0.75em;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: box-shadow 0.15s, border-color 0.15s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.post-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.post-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+}
+.post-card-title {
+  font-weight: 600;
+  font-size: 1.05em;
+}
+.post-card-date {
+  font-size: 0.8em;
+  color: var(--text-pale-color);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.post-card-excerpt {
+  margin: 0.5em 0 0;
+  font-size: 0.85em;
+  color: var(--text-pale-color);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .home-columns {
   display: flex;
-  gap: 2.5em;
+  gap: 0.75em;
   padding: 2em 15px 0;
 }
 .home-main { flex: 1; min-width: 0; }
@@ -105,7 +146,7 @@ body.homepage .layout-list { margin-top: 0; }
 #sort-order, #sort-order-mobile {
   width: 100%;
   font-size: 0.85em;
-  padding: 0.5em 0.75em;
+  padding: 0.6em 0.75em;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   background: var(--bg-color);
@@ -118,6 +159,7 @@ body.homepage .layout-list { margin-top: 0; }
   background-position: right 0.6em center;
   padding-right: 2em;
   transition: border-color 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 #sort-order:hover, #sort-order-mobile:hover {
   border-color: var(--primary-color);
@@ -215,7 +257,7 @@ footer .right #theme-toggle svg { scale: 1; }
     let activeTag = null;
 
     const filterAndSort = () => {
-      const posts = Array.from(postList.querySelectorAll('.post'));
+      const posts = Array.from(postList.querySelectorAll('.post-card'));
       posts.forEach(p => {
         if (!activeTag) {
           p.style.display = '';

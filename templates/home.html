@@ -78,7 +78,7 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                         {% set tags = get_taxonomy(kind="tags") %} {% if
                         tags.items %}
                         <div class="mobile-filter-group">
-                            <h2>Tags</h2>
+                            <h2>Filter By Tag</h2>
                             <div class="sidebar-tags">
                                 {% for tag in tags.items %}
                                 <button type="button" class="tag-pill" data-filter-tag="{{ tag.name | slugify }}"
@@ -102,16 +102,22 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                         {% for post in blog_section.pages |
                         slice(end=section.extra.recent_max) %}
                         <a
-                            class="post instant {% if post.extra.featured %}featured{% endif %}"
+                            class="post-card instant {% if post.extra.featured %}featured{% endif %}"
                             href="{{ post.permalink }}"
                             data-date="{{ post.date }}"
                             data-tags="{% if post.taxonomies.tags %}{% for tag in post.taxonomies.tags %}{{ tag | slugify }}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}"
                         >
-                            <span>{{ post.title }}</span>
-                            <span class="date"
-                                >{{ post.date |
-                                date(format=section.extra.date_format) }}</span
-                            >
+                            <div class="post-card-header">
+                                <span class="post-card-title">{{ post.title }}</span>
+                                <span class="post-card-date">{{ post.date | date(format=section.extra.date_format) }}</span>
+                            </div>
+                            {% if post.summary %}
+                            <p class="post-card-excerpt">{{ post.summary | striptags | truncate(length=300) }}</p>
+                            {% elif post.description %}
+                            <p class="post-card-excerpt">{{ post.description | truncate(length=300) }}</p>
+                            {% else %}
+                            <p class="post-card-excerpt">{{ post.content | striptags | truncate(length=300) }}</p>
+                            {% endif %}
                         </a>
                         {% endfor %}
                     </div>
@@ -138,7 +144,7 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                 </div>
                 {% set tags = get_taxonomy(kind="tags") %} {% if tags.items %}
                 <div class="sidebar-section">
-                    <h2>Tags</h2>
+                    <h2>Filter By Tag</h2>
                     <div class="sidebar-tags">
                         {% for tag in tags.items %}
                         <button type="button" class="tag-pill" data-filter-tag="{{ tag.name | slugify }}"
