@@ -96,9 +96,9 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                             <h2>Tags</h2>
                             <div class="sidebar-tags">
                                 {% for tag in tags.items %}
-                                <a href="{{ tag.permalink }}" class="tag-pill"
+                                <button type="button" class="tag-pill" data-filter-tag="{{ tag.name | slugify }}"
                                     >{{ tag.name | lower }} ({{ tag.pages |
-                                    length }})</a
+                                    length }})</button
                                 >
                                 {% endfor %}
                             </div>
@@ -120,6 +120,7 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                             class="post instant {% if post.extra.featured %}featured{% endif %}"
                             href="{{ post.permalink }}"
                             data-date="{{ post.date }}"
+                            data-tags="{% if post.taxonomies.tags %}{% for tag in post.taxonomies.tags %}{{ tag | slugify }}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}"
                         >
                             <span>{{ post.title }}</span>
                             <span class="date"
@@ -155,9 +156,9 @@ section.lang }}{% endif %}{% endblock lang %} {% block title %}{{ config.title
                     <h2>Tags</h2>
                     <div class="sidebar-tags">
                         {% for tag in tags.items %}
-                        <a href="{{ tag.permalink }}" class="tag-pill"
+                        <button type="button" class="tag-pill" data-filter-tag="{{ tag.name | slugify }}"
                             >{{ tag.name | lower }} ({{ tag.pages | length
-                            }})</a
+                            }})</button
                         >
                         {% endfor %}
                     </div>

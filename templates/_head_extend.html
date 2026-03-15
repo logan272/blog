@@ -114,13 +114,20 @@ footer .right #theme-toggle svg { scale: 1; }
   padding: 0.2em 0.7em;
   border-radius: 9999px;
   font-size: 0.85em;
+  font-family: inherit;
   background: var(--primary-pale-color);
   color: var(--primary-color);
   text-decoration: none;
   line-height: 1.4;
+  border: none;
+  cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
 .tag-pill:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+.tag-pill.active {
   background: var(--primary-color);
   color: #fff;
 }
@@ -148,19 +155,48 @@ footer .right #theme-toggle svg { scale: 1; }
 
   const postList = document.getElementById('post-list');
   if (postList) {
-    const sortPosts = (value) => {
+    let activeTag = null;
+
+    const filterAndSort = () => {
       const posts = Array.from(postList.querySelectorAll('.post'));
-      posts.sort((a, b) => {
+      posts.forEach(p => {
+        if (!activeTag) {
+          p.style.display = '';
+        } else {
+          const tags = (p.dataset.tags || '').split(',');
+          p.style.display = tags.includes(activeTag) ? '' : 'none';
+        }
+      });
+      const visible = posts.filter(p => p.style.display !== 'none');
+      const sortVal = (document.getElementById('sort-order') || document.getElementById('sort-order-mobile')).value;
+      visible.sort((a, b) => {
         const da = new Date(a.dataset.date);
         const db = new Date(b.dataset.date);
-        return value === 'oldest' ? da - db : db - da;
+        return sortVal === 'oldest' ? da - db : db - da;
       });
-      posts.forEach(p => postList.appendChild(p));
+      visible.forEach(p => postList.appendChild(p));
     };
+
     document.querySelectorAll('#sort-order, #sort-order-mobile').forEach(sel => {
       sel.addEventListener('change', () => {
-        sortPosts(sel.value);
         document.querySelectorAll('#sort-order, #sort-order-mobile').forEach(s => s.value = sel.value);
+        filterAndSort();
+      });
+    });
+
+    document.querySelectorAll('[data-filter-tag]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.dataset.filterTag;
+        if (activeTag === tag) {
+          activeTag = null;
+          document.querySelectorAll('[data-filter-tag]').forEach(b => b.classList.remove('active'));
+        } else {
+          activeTag = tag;
+          document.querySelectorAll('[data-filter-tag]').forEach(b => {
+            b.classList.toggle('active', b.dataset.filterTag === tag);
+          });
+        }
+        filterAndSort();
       });
     });
   }
