@@ -1,11 +1,26 @@
 <meta name="google" content="notranslate">
 <style>
+/* ── Custom Properties ─────────────────────────────────────────────── */
+:root {
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-default: rgba(0, 0, 0, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --radius-card: 10px;
+  --radius-pill: 9999px;
+  --radius-input: 8px;
+  --transition-fast: 0.15s;
+  --content-max-width: 1100px;
+}
+
+/* ── Global Overrides ──────────────────────────────────────────────── */
 #inline-toc details { border: none; }
 #name { font-size: 1.5em; }
 .prose h1 { font-size: 1.75em; }
 .prose h2 { font-size: 1.4em; }
 .prose h3 { font-size: 1.2em; }
 .prose h4, .prose h5, .prose h6 { font-size: 1.1em; }
+/* !important: overrides the theme's overflow-y: scroll on body which causes a double scrollbar */
 body { --avatar-size: 48px; overflow-y: auto !important; }
 @media (max-width: 425px) {
   #name { font-size: 1.2em; }
@@ -15,24 +30,24 @@ body { --avatar-size: 48px; overflow-y: auto !important; }
   .prose h3 { font-size: 1.1em; }
   .prose h4, .prose h5, .prose h6 { font-size: 1em; }
 }
+
+/* ── Top Bar ───────────────────────────────────────────────────────── */
 .top-bar {
   position: sticky;
   top: 0;
   z-index: 100;
   background: var(--bg-color);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border-subtle);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 .top-bar-inner {
-  max-width: 1100px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75em 15px;
 }
-body.homepage #wrapper { justify-content: start; max-width: 1100px; min-height: auto !important; }
-body.homepage main { padding: 1em 0; min-height: auto !important; }
 .top-bar-left {
   display: flex;
   align-items: center;
@@ -73,7 +88,43 @@ body.homepage main { padding: 1em 0; min-height: auto !important; }
   width: 20px;
   height: 20px;
 }
+
+/* ── Homepage Layout ───────────────────────────────────────────────── */
+/* !important: overrides the theme's min-height: 100vh on #wrapper and main which pushes footer off-screen on short pages */
+body.homepage #wrapper { justify-content: start; max-width: var(--content-max-width); min-height: auto !important; }
+body.homepage main { padding: 1em 0; min-height: auto !important; }
 body.homepage .layout-list { margin-top: 0; }
+.home-columns {
+  display: flex;
+  gap: 0.75em;
+  padding: 0.25em 15px 0;
+}
+.home-main { flex: 1; min-width: 0; }
+.home-main .layout-list { margin-top: 0; }
+.home-main .post-list { padding: 0; }
+.home-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-top: 2.6em;
+}
+.sidebar-section {
+  padding: 1em;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  background: var(--bg-color);
+  box-shadow: var(--shadow-card);
+}
+.sidebar-section h2 {
+  font-size: 0.9em;
+  font-weight: 600;
+  margin: 0 0 0.6em;
+  color: var(--text-pale-color);
+}
+
+/* ── Post Cards ────────────────────────────────────────────────────── */
 .posts-title {
   font-size: 1.1em;
   font-weight: 600;
@@ -82,18 +133,19 @@ body.homepage .layout-list { margin-top: 0; }
 .post-card {
   display: block;
   padding: 1em 1.25em;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
   margin-bottom: 0.75em;
   text-decoration: none;
   color: var(--text-color);
-  transition: box-shadow 0.15s, border-color 0.15s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 .post-card:hover {
   border-color: var(--primary-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--border-subtle);
 }
+.post-card.hidden { display: none; }
 .post-card-header {
   display: flex;
   justify-content: space-between;
@@ -129,7 +181,7 @@ body.homepage .layout-list { margin-top: 0; }
   justify-content: space-between;
   margin-top: 0.75em;
   padding-top: 0.6em;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid var(--border-subtle);
   gap: 0.75em;
 }
 .post-card-tags {
@@ -141,41 +193,14 @@ body.homepage .layout-list { margin-top: 0; }
   font-size: 0.75em;
   padding: 0.15em 0.5em;
 }
-.home-columns {
-  display: flex;
-  gap: 0.75em;
-  padding: 0.25em 15px 0;
-}
-.home-main { flex: 1; min-width: 0; }
-.home-main .layout-list { margin-top: 0; }
-.home-main .post-list { padding: 0; }
-.home-sidebar {
-  width: 220px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  padding-top: 2.6em;
-}
-.sidebar-section {
-  padding: 1em;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  background: var(--bg-color);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-.sidebar-section h2 {
-  font-size: 0.9em;
-  font-weight: 600;
-  margin: 0 0 0.6em;
-  color: var(--text-pale-color);
-}
+
+/* ── Sort Controls ─────────────────────────────────────────────────── */
 #sort-order, #sort-order-mobile {
   width: 100%;
   font-size: 0.85em;
   padding: 0.6em 0.75em;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-input);
   background: var(--bg-color);
   color: var(--text-color);
   cursor: pointer;
@@ -185,7 +210,7 @@ body.homepage .layout-list { margin-top: 0; }
   background-repeat: no-repeat;
   background-position: right 0.6em center;
   padding-right: 2em;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 #sort-order:hover, #sort-order-mobile:hover {
@@ -196,11 +221,34 @@ body.homepage .layout-list { margin-top: 0; }
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px var(--primary-pale-color);
 }
+
+/* ── Tag Pills ─────────────────────────────────────────────────────── */
 .sidebar-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4em;
 }
+.tag-pill {
+  display: inline-block;
+  padding: 0.2em 0.7em;
+  border-radius: var(--radius-pill);
+  font-size: 0.85em;
+  font-family: inherit;
+  background: var(--primary-pale-color);
+  color: var(--primary-color);
+  text-decoration: none;
+  line-height: 1.4;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.tag-pill:hover,
+.tag-pill.active {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* ── Mobile Filters ────────────────────────────────────────────────── */
 .mobile-filters { display: none; }
 @media (max-width: 768px) {
   body.homepage #wrapper { max-width: 768px; }
@@ -245,32 +293,12 @@ body.homepage .layout-list { margin-top: 0; }
     color: var(--text-pale-color);
   }
 }
+
+/* ── Utilities ─────────────────────────────────────────────────────── */
 footer .right #theme-toggle svg { scale: 1; }
 .prose table { width: 100%; border: none; }
 .table-wrapper { overflow-x: auto; }
 .prose .mermaid svg { max-width: 100%; height: auto; }
-.tag-pill {
-  display: inline-block;
-  padding: 0.2em 0.7em;
-  border-radius: 9999px;
-  font-size: 0.85em;
-  font-family: inherit;
-  background: var(--primary-pale-color);
-  color: var(--primary-color);
-  text-decoration: none;
-  line-height: 1.4;
-  border: none;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
-.tag-pill:hover {
-  background: var(--primary-color);
-  color: #fff;
-}
-.tag-pill.active {
-  background: var(--primary-color);
-  color: #fff;
-}
 </style>
 <script type="module">
   const blocks = document.querySelectorAll('code[data-lang="mermaid"]');
@@ -301,13 +329,13 @@ footer .right #theme-toggle svg { scale: 1; }
       const posts = Array.from(postList.querySelectorAll('.post-card'));
       posts.forEach(p => {
         if (!activeTag) {
-          p.style.display = '';
+          p.classList.remove('hidden');
         } else {
           const tags = (p.dataset.tags || '').split(',');
-          p.style.display = tags.includes(activeTag) ? '' : 'none';
+          p.classList.toggle('hidden', !tags.includes(activeTag));
         }
       });
-      const visible = posts.filter(p => p.style.display !== 'none');
+      const visible = posts.filter(p => !p.classList.contains('hidden'));
       const sortVal = (document.getElementById('sort-order') || document.getElementById('sort-order-mobile')).value;
       visible.sort((a, b) => {
         const da = new Date(a.dataset.date);
