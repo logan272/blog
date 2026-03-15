@@ -2,6 +2,7 @@
 template: "home.html"
 extra:
   name: "Logan's Blog"
+  avatar: "images/avatar.jpg"
   recent: true
   recent_max: 10
   recent_more_text: "more posts →"

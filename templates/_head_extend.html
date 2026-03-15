@@ -2,6 +2,19 @@
 <style>
 #inline-toc details { border: none; }
 #name { font-size: 1.5em; }
+.prose h1 { font-size: 1.75em; }
+.prose h2 { font-size: 1.4em; }
+.prose h3 { font-size: 1.2em; }
+.prose h4, .prose h5, .prose h6 { font-size: 1.1em; }
+body { --avatar-size: 48px; }
+@media (max-width: 425px) {
+  #name { font-size: 1.2em; }
+  body { --avatar-size: 36px; }
+  .prose h1 { font-size: 1.4em; }
+  .prose h2 { font-size: 1.2em; }
+  .prose h3 { font-size: 1.1em; }
+  .prose h4, .prose h5, .prose h6 { font-size: 1em; }
+}
 body.homepage #wrapper { justify-content: start; }
 body.homepage main { padding: 1.5em 0; }
 body.homepage .layout-list { margin-top: 2em; }
