@@ -60,13 +60,13 @@ Alice: $100
 TigerBeetle doesn't store a single "balance" number. Instead, it stores **four cumulative counters** per account — and your application derives the balance from them:
 
 ```mermaid
-graph TB
-    subgraph "Alice's Account"
-        DP["debits_pending: $20"]
-        DPo["debits_posted: $50"]
-        CP["credits_pending: $0"]
-        CPo["credits_posted: $170"]
-    end
+classDiagram
+    class Alice {
+        debits_pending: $20
+        debits_posted: $50
+        credits_pending: $0
+        credits_posted: $170
+    }
 ```
 
 | Counter | Meaning |
@@ -88,7 +88,7 @@ Available balance = (credits_posted - debits_posted) - debits_pending
 
 A single `balance` field can't distinguish between:
 - "Alice has $100 with nothing in flight"
-- "Alice has $200 with $100 reserved for a pending order"
+- "Alice has `$200` with `$100` reserved for a pending order"
 
 Both show `balance = $100`, but they represent very different states. With four counters, the full picture is always visible — both the confirmed state and the in-flight state.
 
