@@ -2,10 +2,10 @@
 <style>
 /* ── Custom Properties ─────────────────────────────────────────────── */
 :root {
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-default: rgba(0, 0, 0, 0.15);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --border-default: rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
   --radius-card: 10px;
   --radius-pill: 9999px;
   --radius-input: 8px;
@@ -13,10 +13,10 @@
   --content-max-width: 1100px;
 }
 body.dark {
-  --border-subtle: rgba(255, 255, 255, 0.15);
-  --border-default: rgba(255, 255, 255, 0.25);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* ── Global Overrides ──────────────────────────────────────────────── */
@@ -74,7 +74,7 @@ body { --avatar-size: 48px; overflow-y: auto !important; }
 .top-bar-right {
   display: flex;
   align-items: center;
-  gap: 0.75em;
+  gap: 1.1em;
 }
 .top-bar-right a,
 .top-bar-right button {
@@ -146,11 +146,14 @@ body.homepage .layout-list { margin-top: 0; }
   text-decoration: none;
   color: var(--text-color);
   transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-card);
 }
 .post-card:hover {
-  border-color: var(--primary-color);
+  border-color: rgba(0, 0, 0, 0.3);
   box-shadow: 0 2px 8px var(--border-subtle);
+}
+body.dark .post-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 .post-card.hidden { display: none; }
 .post-card-header {
